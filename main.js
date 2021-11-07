@@ -6,30 +6,37 @@ const ConseguirLugares = () => {
 
             lugares.forEach(lugar => {
                 let lugarInfo = {
-                    posicion: { latitud: lugar.latitud, longitud: lugar.longitud },
-                    nombre: lugar.Nombre
+                    lat: parseFloat(lugar.latitud),
+                    lng: parseFloat(lugar.longitud),
+                    /* nombre: lugar.Nombre */
                 }
-                lugaresInfo.push(lugarInfo)
+                lugaresInfo.push(lugarInfo);
+                console.log("sucursales", lugarInfo);
+                dibujarMapa(lugar);
             })
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(usuarioUbicacion => {
-                    let ubicacion = {
-                        lat: usuarioUbicacion.coords.latitude,
-                        lng: usuarioUbicacion.coords.longitude
-                    }
-                    console.log("arreglo de mi ubicacion", ubicacion);
-                    dibujarMapa(ubicacion)
-                })
-            }
+
+            navigator.geolocation.getCurrentPosition(lugares.forEach(lugar => {
+                let lugarInfo = {
+                    lat: parseFloat(lugar.latitud),
+                    lng: parseFloat(lugar.longitud),
+                }
+
+                /* console.log("mi ubicacion", lugarInfo);
+                dibujarMapa(lugarInfo) */
+
+
+            }))
+
         })
 }
 const dibujarMapa = (obj) => {
-    console.log("objetComo recibe el objeto", obj);
     let mapa = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
         center: obj
+
     })
+    console.log("obj", obj);
 
     let marcadorUsuario = new google.maps.Marker({
         position: obj,
@@ -39,11 +46,16 @@ const dibujarMapa = (obj) => {
     marcadorUsuario.setMap(mapa)
     let marcadores = lugaresInfo.map(lugar => {
         return new google.maps.Marker({
-            position: lugar.posicion,
-            title: lugar.nombre,
+            lat: parseFloat(lugar.latitud),
+            lng: parseFloat(lugar.longitud),
             map: mapa
         })
+
     })
+
+
 }
+
+
 
 ConseguirLugares()
