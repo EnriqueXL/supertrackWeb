@@ -11,8 +11,7 @@ const ConseguirLugares = () => {
                     /* nombre: lugar.Nombre */
                 }
                 lugaresInfo.push(lugarInfo);
-                console.log("sucursales", lugarInfo);
-                dibujarMapa(lugar);
+
             })
 
 
@@ -22,8 +21,7 @@ const ConseguirLugares = () => {
                     lng: parseFloat(lugar.longitud),
                 }
 
-                /* console.log("mi ubicacion", lugarInfo);
-                dibujarMapa(lugarInfo) */
+                dibujarMapa(lugarInfo)
 
 
             }))
